@@ -47,7 +47,7 @@ def get_price(vegetable):
 
 # ========================
 # 3. 1袋をシミュレート
-#    上限 L を与え、袋に入る (C, T, E) を返す
+#    上限Lを与え、袋に入る(C, T, E)を返す
 # ========================
 def simulate_one_bag(L):
     total_price = 0
@@ -60,7 +60,7 @@ def simulate_one_bag(L):
             break
         
         # 野菜の種類を 4:3:3 の比率で選ぶ
-        # 例えば random.random() を使い、0〜1の一様乱数から選ぶ方法
+        # random.random() を使い、0〜1の一様乱数から選ぶ
         r = random.random()
         if r < 0.4:
             veg_type = 0  # キュウリ
@@ -97,7 +97,8 @@ def simulate_10_bags(L):
     return bags
 
 # ========================
-# 5. 誤差(スコア)計算関数 (例: 二乗誤差の合計)
+# 5. 誤差計算関数
+#    - 二乗誤差を使用
 #    - 実際データ actual_bags と
 #      シミュ結果 sim_bags は [(C1,T1,E1),..., (C10,T10,E10)] の形
 # ========================
@@ -122,17 +123,16 @@ def main():
         Ei = int(input_data[3*i + 2])
         actual_bags.append((Ci, Ti, Ei))
     
-    # 乱数シードを固定する場合（再現用）
-    random.seed(0)
+    # 乱数シードを固定する場合
+    random.seed(100)
     
     best_L = 500
     best_score = float('inf')
     
     # 単純に 500〜5000 の範囲を総当たり (1刻み)
-    # 計算コストが重い場合はステップを大きくして段階的に絞るなど工夫する
     for L in tqdm.tqdm(range(500, 5001)):
         # シミュレーション回数が少ないと誤差が大きくブレやすいので、
-        # 各Lで複数回(例: 1〜3回など)シミュレートし平均スコアを使うなどしてもよい
+        # 各Lで複数回シミュレートし平均スコアを使う
         # 例: 各Lに対して 3回シミュレートして平均スコアをとる
         times = 3
         total_score = 0

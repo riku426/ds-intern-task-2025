@@ -34,7 +34,7 @@ def solve():
     # 規格行より下をdetails_rowsとして扱う
     detail_rows = rows[spec_row_index + 1 :]
 
-    # 項目名（例: "量", "定植", "備考"）→ 各規格列の値一覧
+    # 項目名（例: "量", "定植", "備考"）→ 各規格列の値一覧辞書を作成
     details_map = {}
 
     for row in detail_rows:
@@ -62,7 +62,7 @@ def solve():
 
     for i, spec in enumerate(specs):
         entry = {}
-        # まず共通情報をコピー
+        # 共通情報をコピー
         for k, v in shared_fields.items():
             entry[k] = v
 
